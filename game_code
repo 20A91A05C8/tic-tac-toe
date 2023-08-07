@@ -1,0 +1,242 @@
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+#include <bits/stdc++.h>
+#include <cstdlib>
+using namespace std;
+void credits(){
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+    cout<<"This Game is created by Velaga charan.\nIf you require any further information, let me know.you can contact me by e-mail:charanvelaga678@gmail.com\n TRY TO LEARN OR UNDERSTAND THE CODE BUT DO NOT COPY THE CODE!\n";
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+}
+void game_info(){
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+    cout<<"It is a very simple 3X3 grid tic-tac-toe game.\nA player get a chance after the other player complets.\nThe first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner. When all 9 squares are full, the game is over.If no player has 3 marks in a row, the game ends in a tie.\n";
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+}
+bool checker(vector<char>a){
+    if(a[0]==a[1] && a[1]==a[2]){
+        cout<<"-------"<<a[0]<<" is the Winner------------";
+    }
+    else if(a[3]==a[4]&& a[3]==a[5]){
+        cout<<"-------"<<a[3]<<" is the Winner------------";
+    }
+    else if(a[6]==a[7] && a[6]==a[8]){
+        cout<<"-------"<<a[6]<<" is the Winner------------";
+    }
+    else if(a[0]==a[3] && a[6]==a[0]){
+        cout<<"-------"<<a[0]<<" is the Winner------------";
+    }
+    else if(a[1]==a[4]&& a[7]==a[1]){
+        cout<<"-------"<<a[1]<<" is the Winner------------";
+    }
+    else if(a[2]==a[5]&& a[2]==a[8]){
+        cout<<"-------"<<a[2]<<" is the Winner------------";
+    }
+    else if(a[0]==a[4]&& a[0]==a[8]){
+        cout<<"-------"<<a[0]<<" is the Winner------------";
+    }
+    else if(a[2]==a[4]&& a[2]==a[6]){
+        cout<<"-------"<<a[2]<<" is the Winner------------";
+    }
+    else if(a[0]!='1' && a[1]!='2' && a[2]!='3' && a[3]!='4' && a[4]!='4' && a[5]!='6' && a[6]!='7' && a[8]!='9'){
+        cout<<"--------------Its a draw---------------------";
+    }
+    else{
+        return false;
+    }
+    return true;
+}
+void display(vector<char>a){
+cout<<a[0]<<" | "<<a[1]<<" | "<<a[2]<<endl;
+cout<<"___________\n";
+cout<<a[3]<<" | "<<a[4]<<" | "<<a[5]<<endl;
+cout<<"___________\n";
+cout<<a[6]<<" | "<<a[7]<<" | "<<a[8]<<endl;
+}
+bool check(vector<char>a){
+    if(a[0]==a[1] && a[1]==a[2]){
+        if(a[0]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[3]==a[4]&& a[3]==a[5]){
+        if(a[3]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[6]==a[7] && a[6]==a[8]){
+        if(a[6]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[0]==a[4] && a[4]==a[8]){
+        if(a[0]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[2]==a[4]&& a[2]==a[6]){
+        if(a[2]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[0]==a[3]&& a[0]==a[6]){
+        if(a[0]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[1]==a[4]&& a[1]==a[7]){
+        if(a[1]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[2]==a[5]&& a[2]==a[8]){
+        if(a[2]=='X')
+        cout<<"-------you are the Winner------------";
+        else
+        cout<<"-------computer is the Winner------------";
+    }
+    else if(a[0]!='1' && a[1]!='2' && a[2]!='3' && a[3]!='4' && a[4]!='4' && a[5]!='6' && a[6]!='7' && a[8]!='9'){
+        cout<<"--------------Its a draw---------------------";
+    }
+    else{
+        return false;
+    }
+    return true;
+}
+bool find(int p,int q,int r,vector<char>&a,vector<int>&v){
+    if((a[p]==a[q] && v[r]==0)||(a[q]==a[r] && v[p]==0)||(a[p]==a[r]&& v[q]==0)){
+        if(v[p]==0){
+            a[p]='O';
+            v[p]=1;
+        }
+        else if(v[q]==0){
+            a[q]='O';
+            v[q]=1;
+        }
+        else {
+            a[r]='O';
+            v[r]=1;
+        }
+        return true;
+    }
+    return false;
+}
+void cmpturn(vector<int>&v,vector<char>&a){
+   if(find(0,1,2,a,v))return;
+   if(find(3,4,5,a,v))return;
+   if(find(6,7,8,a,v))return;
+   if(find(0,3,6,a,v))return;
+   if(find(1,4,7,a,v))return;
+   if(find(2,5,8,a,v))return;
+   if(find(0,4,8,a,v))return;
+   if(find(2,4,6,a,v))return;
+   for(int i=0;i<9;i++){
+    if(v[i]==0){
+        a[i]='O';
+        v[i]=1;
+        return;
+    }
+   } 
+}
+int main(){
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+    cout<<"||                                  ||\n";
+    cout<<"||  Welcome to TIC-TAC-TOE Game     ||\n";
+    cout<<"||                                  ||\n";
+    cout<<"--------------------------------------\n";
+    cout<<"--------------------------------------\n";
+    cout<<"\n\n\n";
+    while(true){
+    cout<<"\n\t1.Play 1-VS-1 Game\n\t2.Play with Computer\n\t3.About the Game\n\t4.Credits for the game\n\t5.exit\n\n\tEnter the number to choose:";
+    int choose;
+    cin>>choose;
+    if(choose==1){
+    vector<char>a={'1','2','3','4','5','6','7','8','9'};
+vector<int>v(9,0);
+    cout<<"--------------------------------------------\n";
+    cout<<"Welcome to tic-tac-toe game:\n";
+    cout<<"--------------------------------------------\n";
+    int flag=1;
+    display(a);
+    while(true){
+        int n;
+        if(flag==1)cout<<"\nit's 'X' players turn:";
+        else cout<<"\nit's 'O' players turn:";
+        cout<<"\nselect a number:\n";
+        cin>>n;
+        n--;
+        if(v[n]==1){
+            cout<<"\nPlease enter valid number:\n";
+            continue;
+        }
+        else{
+            v[n]=1;
+            if(flag==1){
+            a[n]='X';
+            flag=0;
+            display(a);
+            if(checker(a))break;
+            }
+            else{
+                a[n]='O';
+                flag=1;
+                display(a);
+                if(checker(a))break;
+            }
+        }
+    }
+    }
+    else if(choose==2){
+        vector<char>a={'1','2','3','4','5','6','7','8','9'};
+        vector<int>v(9,0);
+        cout<<"--------------------------------------------\n";
+    cout<<"Welcome to tic-tac-toe game:\n";
+    cout<<"--------------------------------------------\n";
+    display(a);
+    while(true){
+        int n;
+        cout<<"\nyour turn select a number:\n";
+        cin>>n;
+        n--;
+        if(v[n]==1){
+            cout<<"\nPlease enter valid number:\n";
+            continue;
+        }
+        else{
+            v[n]=1;
+            a[n]='X';
+            display(a);
+            if(check(a))break;
+            cout<<"\nit's computer turn\n";
+            cmpturn(v,a);
+            sleep(1);
+            display(a);
+            if(check(a))break;
+        }
+    }
+    }
+    else if(choose==3){
+         game_info();
+    }else if(choose==4){
+        credits();
+    }
+    else{
+        break;
+    }
+    }
+}
